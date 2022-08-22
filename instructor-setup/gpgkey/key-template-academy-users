@@ -1,0 +1,6 @@
+Key-Type: RSA
+Subkey-Type: RSA
+Name-Real: dokerkubernetesparticipant
+Name-Comment: PGP key for dockerkubernetesparticipant 's AWS IAM user
+Name-Email: dockerkubernetesparticipant@dataminded.be
+Expire-Date: 0

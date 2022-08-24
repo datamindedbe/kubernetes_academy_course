@@ -16,6 +16,7 @@ module "eks" {
   cluster_version = "1.22"
   subnet_ids      = data.aws_subnets.private.ids
   vpc_id          = module.vpc.vpc_id
+  enable_irsa = true
 
   eks_managed_node_group_defaults = {
     disk_size      = 50

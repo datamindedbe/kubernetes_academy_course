@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  key: value
+  otherkey: value
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: envcm

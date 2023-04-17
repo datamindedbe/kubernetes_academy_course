@@ -23,12 +23,14 @@ module "vpc" {
 
   public_subnet_tags = {
     "kubernetes.io/cluster/${local.cluster_name}" = "shared"
-    "tier" = "public"
+    "kubernetes.io/role/elb"                      = 1
+    "tier"                                        = "public"
   }
 
   private_subnet_tags = {
     "kubernetes.io/cluster/${local.cluster_name}" = "shared"
-    "tier" = "private"
+    "kubernetes.io/role/internal-elb"             = 1
+    "tier"                                        = "private"
   }
 }
 

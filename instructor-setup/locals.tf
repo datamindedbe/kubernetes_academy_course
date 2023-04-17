@@ -5,9 +5,11 @@ locals {
   default_passphrase = "Data Minded r0cks!"
   groupname          = "kubernetes-workshop"
   cluster_name       = "k8s-${random_string.cluster_suffix.result}"
+  tcp_protocol_code  = 6
+
 }
 
 resource "random_string" "cluster_suffix" {
-  length = 6
+  length  = 6
   special = false
 }

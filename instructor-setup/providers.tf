@@ -15,7 +15,7 @@ provider "aws" {
   allowed_account_ids = ["299641483789"]
   default_tags {
     tags = {
-      course = "Docker and Kubernetes"
+      "Course" = "Docker and Kubernetes"
     }
   }
 }

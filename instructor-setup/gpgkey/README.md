@@ -6,8 +6,8 @@ We will use the template created
 
 - `export GPG_TTY=$(tty)`
 - `gpg --batch --gen-key key-template-academy-users`
-- `gpg --output public-key-academy-users.gpg --export dockerkubernetesparticipant@dataminded.be`
-  - when prompted for passphrase, use one you remember
+- `gpg --output public-key-academy-users.gpg --export kubernetesparticipant@dataminded.be`
+- when prompted for passphrase, use one you remember
 
 Decrypt the output password
 

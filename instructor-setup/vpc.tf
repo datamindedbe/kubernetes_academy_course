@@ -6,18 +6,19 @@ data "aws_availability_zones" "available" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "3.14.2"
+  version = "5.1.2"
 
-  name                 = "docker-k8s-vpc"
-  cidr                 = "10.2.0.0/16"
-  azs                  = slice(data.aws_availability_zones.available.names, 0, 3)
-  private_subnets      = ["10.2.128.0/20", "10.2.144.0/20", "10.2.160.0/20"]
-  public_subnets       = ["10.2.0.0/20", "10.2.16.0/20", "10.2.32.0/20"]
-  enable_nat_gateway   = true
-  single_nat_gateway   = true
-  enable_dns_hostnames = true
-
-  tags = {
+  name                          = "docker-k8s-vpc"
+  cidr                          = "10.2.0.0/16"
+  azs                           = slice(data.aws_availability_zones.available.names, 0, 3)
+  private_subnets               = ["10.2.128.0/20", "10.2.144.0/20", "10.2.160.0/20"]
+  public_subnets                = ["10.2.0.0/20", "10.2.16.0/20", "10.2.32.0/20"]
+  enable_nat_gateway            = true
+  single_nat_gateway            = true
+  enable_dns_hostnames          = true
+  enable_dns_support            = true
+  manage_default_security_group = true
+  tags                          = {
     "kubernetes.io/cluster/${local.cluster_name}" = "shared"
   }
 

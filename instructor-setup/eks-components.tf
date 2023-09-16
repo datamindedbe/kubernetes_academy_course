@@ -15,10 +15,22 @@ module "aws-load-balancer-controller" {
   vpc_id                              = module.vpc.vpc_id
 }
 
+module "external-dns" {
+  source                              = "../modules/external-dns"
+  cluster_name                        = local.cluster_name
+  aws_iam_openid_connect_provider_arn = module.eks.oidc_provider_arn
+  aws_iam_openid_connect_provider_url = module.eks.cluster_oidc_issuer_url
+  hosted_zone_id                      = aws_route53_zone.waydata.id
+}
+
 provider "helm" {
   kubernetes {
     host                   = module.eks.cluster_endpoint
     cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
-    token                  = data.aws_eks_cluster_auth.cluster.token
+    exec {
+      api_version = "client.authentication.k8s.io/v1beta1"
+      args        = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]
+      command     = "aws"
+    }
   }
 }

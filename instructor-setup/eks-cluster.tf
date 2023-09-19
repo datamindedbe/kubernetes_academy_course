@@ -21,6 +21,8 @@ module "eks" {
   eks_managed_node_group_defaults = {
     disk_size      = 50
     instance_types = ["t3.large"]
+    pre_bootstrap_user_data = local.ssm_userdata
+    iam_role_additional_policies = {"ssm": "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"}
   }
 
   cluster_security_group_additional_rules = {

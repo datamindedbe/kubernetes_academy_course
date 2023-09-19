@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: cat-1-webapp
+  name: cat-1-webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cat-1-webapp
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: cat-1-webapp
+    spec:
+      containers:
+      - image: nilli9990/cat-webapp
+        name: cat-webapp
+        env:
+        - name: CAT_INDEX
+          value: "1"
+        ports:
+        - containerPort: 5000
+        resources: {}
+status: {}

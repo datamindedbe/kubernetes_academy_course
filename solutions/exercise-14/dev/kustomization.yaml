@@ -1,0 +1,13 @@
+bases:
+  - ../base
+
+commonLabels:
+ env: dev
+
+namespace: niels
+
+images:
+- name: cat-webapp
+  newName: nilli9990/cat-webapp
+  newTag: latest
+

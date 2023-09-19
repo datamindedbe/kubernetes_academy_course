@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: cat-webapp
+  name: cat-webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cat-webapp
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: cat-webapp
+    spec:
+      containers:
+      - image: nginx
+        name: app
+        envFrom:
+        - secretRef:
+            name: my-secret
+        env:
+        - name: CAT_INDEX
+          value: "0"
+        ports:
+        - containerPort: 5000
+        volumeMounts:
+          - name: prom-vol
+            mountPath: /etc/foo
+        resources: {}
+      volumes:
+      - name: prom-vol
+        configMap:
+          name: my-prometheus-config
+status: {}

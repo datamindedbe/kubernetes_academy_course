@@ -1,9 +1,11 @@
 # Rbac
 
+I created a role with binding and service account to get/list pods in default namespace.
+I attached the correct service account to the kubectl pod such that it can list, get all pods in the default namespace.
+
 ## Steps
 
-- create role + binding + service account to get/list pods in default namespace
-- create kubectl pod using this service account
--- image: bitnami/kubectl:1.22-debian-10
-- exec in the pod and list pods in multiple namespaces
-- (bis) extend permissions to delete pods (pod-manager)
+- exec in the kubectl pod and list pods in default namespace (this should work)
+- try to list pods in a different workspace (this should fail)
+- Create a clusterRole and clusterRoleBinding such that the kubectl pod can list/get/delete pods in all namespaces
+- Test whether you changes work by attaching the ClusterRole to the kubectl pod

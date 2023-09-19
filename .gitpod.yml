@@ -11,16 +11,6 @@ tasks:
     command: |
       sudo update-alternatives --install /usr/bin/www-browser www-browser /workspace/bin/open.sh 100
       exit
-  - name: Install AWS CLI (during prebuild)
-    init: |
-      tmpdir="$(mktemp -d)"
-      cd $tmpdir
-      wget "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -O "awscliv2.zip"
-      unzip awscliv2.zip
-      mkdir -p /workspace/aws-cli
-      ./aws/install --install-dir /workspace/aws-cli --bin-dir /workspace/bin
-      cd && rm -r $tmpdir
-    command: exit
 
 image:
   file: .gitpod.dockerfile

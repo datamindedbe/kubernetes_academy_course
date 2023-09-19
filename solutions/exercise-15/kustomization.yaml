@@ -1,0 +1,13 @@
+resources:
+- catDeployment.yaml
+
+secretGenerator:
+  - name: my-secret
+    literals:
+      - username=user
+      - password=secret
+
+configMapGenerator:
+  - name: my-prometheus-config
+    files:
+      - prometheus.yaml

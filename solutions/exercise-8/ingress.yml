@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    alb.ingress.kubernetes.io/scheme: "internet-facing"
+    alb.ingress.kubernetes.io/target-type: "ip"
+    external-dns.alpha.kubernetes.io/hostname: 'niels-cat0.k8sacademy.waydata.be,niels-cat1.k8sacademy.waydata.be'
+spec:
+  ingressClassName: "alb"
+  rules:
+    - host: niels-cat0.k8sacademy.waydata.be
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: cat-0-svc
+                port:
+                  number: 80
+    - host: niels-cat1.k8sacademy.waydata.be
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: cat-1-svc
+                port:
+                  number: 80
+

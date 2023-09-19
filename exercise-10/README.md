@@ -1,6 +1,7 @@
 # Statefulsets
 
 ## Steps
+Use https://github.com/sixeyed/widgetario/tree/main/src/db/postgres-replicated as inspiration for how to start the statefulset
 
 - create postgres db statefulset
 -- image: widgetario/products-db:postgres-replicated

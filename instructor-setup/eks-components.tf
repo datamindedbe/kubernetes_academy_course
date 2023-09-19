@@ -23,6 +23,17 @@ module "external-dns" {
   hosted_zone_id                      = aws_route53_zone.waydata.id
 }
 
+module "k8s-fluent-bit" {
+  source                              = "../modules/fluent-bit"
+  aws_iam_openid_connect_provider_arn = module.eks.oidc_provider_arn
+  aws_iam_openid_connect_provider_url = module.eks.cluster_oidc_issuer_url
+  fluentbit_image                     = "public.ecr.aws/aws-observability/aws-for-fluent-bit:2.23.3"
+}
+
+module "metrics-server" {
+  source = "../modules/metrics-server"
+}
+
 provider "helm" {
   kubernetes {
     host                   = module.eks.cluster_endpoint

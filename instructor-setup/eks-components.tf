@@ -34,6 +34,17 @@ module "metrics-server" {
   source = "../modules/metrics-server"
 }
 
+module "kube-state-metrics" {
+  source = "../modules/kube-state-metrics"
+  aws_iam_openid_connect_provider_arn = module.eks.oidc_provider_arn
+  aws_iam_openid_connect_provider_url = module.eks.cluster_oidc_issuer_url
+  cluster_name                        = local.cluster_name
+  namespace                           = "kube-system"
+  prom_endpoint                       = aws_prometheus_workspace.prometheus.prometheus_endpoint
+  prom_region                         = "eu-west-1"
+  prometheus_role_arn                 = aws_iam_role.prometheus.arn
+}
+
 provider "helm" {
   kubernetes {
     host                   = module.eks.cluster_endpoint

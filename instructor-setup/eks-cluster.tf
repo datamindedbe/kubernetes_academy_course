@@ -35,6 +35,8 @@ module "eks" {
       source_node_security_group = true
     }
   }
+  cluster_enabled_log_types = ["api", "audit"] //, "authenticator", "controllerManager","scheduler"]
+
   node_security_group_additional_rules = {
     ingress_self_all = {
       description = "Node to node all ports/protocols"

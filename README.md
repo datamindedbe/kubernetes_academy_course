@@ -46,3 +46,6 @@ More info on installing it can be found here: https://microk8s.io/docs/getting-s
 - Exercise 16: Using a helm chart
 - Exercise 17: Creating a helm chart
 
+## TODOs
+
+Rework exercise on storage. Split up local vs eks exercise and change the README.md

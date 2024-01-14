@@ -18,12 +18,14 @@ Make sure to change the /etc/hosts with the correct entries such that they are r
 ### Required annotations
 ```
 nginx.ingress.kubernetes.io/rewrite-target: /
-alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
 alb.ingress.kubernetes.io/scheme: "internet-facing"
 alb.ingress.kubernetes.io/target-type: "ip"
-external-dns.alpha.kubernetes.io/hostname: '<first-username>-cat0.k8sacademy.waydata.be,<first-username>-cat1.k8sacademy.waydata.be'
+external-dns.alpha.kubernetes.io/hostname: "<first-username>-cat0.k8sacademy.waydata.be,<first-username>-cat1.k8sacademy.waydata.be"
+alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:eu-west-1:299641483789:certificate/e8045032-8856-4b88-a773-45bec46915de"
 ```
 For more details on the supported annotations, take a look at the aws load balancer controller: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.2/
+
+Note: if your target-type is instance, your services must be a NodePort as it then uses the nodeport to go to your services
 
 ### Specify ingressClassName
 

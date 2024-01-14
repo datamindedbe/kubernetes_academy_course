@@ -3,8 +3,8 @@ kind: Pod
 metadata:
   creationTimestamp: null
   labels:
-    run: nginxempty
-  name: nginxempty
+    run: nginxpvc
+  name: nginxpvc
 spec:
   containers:
   - image: nginx
@@ -16,11 +16,12 @@ spec:
     - containerPort: 80
     resources: {}
     volumeMounts:
-    - mountPath: "/usr/share/nginx/html"
+    - mountPath: "/var/log/nginx"
       name: pv-storage
   dnsPolicy: ClusterFirst
   restartPolicy: Always
   volumes:
   - name: pv-storage
-    emptyDir: {}
+    persistentVolumeClaim:
+      claimName: pv-claim
 status: {}

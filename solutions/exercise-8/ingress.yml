@@ -4,10 +4,10 @@ metadata:
   name: nginx-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
     alb.ingress.kubernetes.io/scheme: "internet-facing"
     alb.ingress.kubernetes.io/target-type: "ip"
-    external-dns.alpha.kubernetes.io/hostname: 'niels-cat0.k8sacademy.waydata.be,niels-cat1.k8sacademy.waydata.be'
+    alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:eu-west-1:299641483789:certificate/e8045032-8856-4b88-a773-45bec46915de"
+    external-dns.alpha.kubernetes.io/hostname: "niels-cat0.k8sacademy.waydata.be,niels-cat1.k8sacademy.waydata.be"
 spec:
   ingressClassName: "alb"
   rules:

@@ -1,22 +1,24 @@
 apiVersion: v1
 kind: Service
 metadata:
-  creationTimestamp: null
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-type: "external"
     service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
-    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "http"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:eu-west-1:299641483789:certificate/e8045032-8856-4b88-a773-45bec46915de"
+    external-dns.alpha.kubernetes.io/hostname: "niels-cat-svc.k8sacademy.waydata.be"
   labels:
     app: cat-svc
   name: cat-svc
 spec:
   ports:
-  - name: 80-5000
+  - name: http
     port: 80
     protocol: TCP
+    targetPort: 5000
+  - name: https
+    port: 443
     targetPort: 5000
   selector:
     app: cat-webapp
   type: LoadBalancer
-status:
-  loadBalancer: {}

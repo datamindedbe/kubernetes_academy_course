@@ -3,19 +3,19 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: cat-webapp
-  name: cat-webapp
+    app: nginx-webapp
+  name: nginx-webapp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cat-webapp
+      app: nginx-webapp
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: cat-webapp
+        app: nginx-webapp
     spec:
       containers:
       - image: nginx

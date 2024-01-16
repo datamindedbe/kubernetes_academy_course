@@ -9,4 +9,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: kubectl-manager
-  namespace: deddfault # the subject can be in a different ns
+  namespace: default # the subject can be in a different ns

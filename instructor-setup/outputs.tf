@@ -26,3 +26,8 @@ output "cluster_name" {
   description = "Kubernetes Cluster Name"
   value       = local.cluster_name
 }
+
+output "gitpod_role_arn" {
+  description = "IAM Role ARN for Gitpod"
+  value       = aws_iam_role.kubernetes_workshop_gitpod_role.arn
+}

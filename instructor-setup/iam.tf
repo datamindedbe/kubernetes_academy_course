@@ -18,6 +18,47 @@ resource "aws_iam_group" "group" {
   name = local.groupname
 }
 
+resource "aws_iam_role" "kubernetes_workshop_gitpod_role" {
+  name               = "kubernetes-workshop-gitpod-role"
+  assume_role_policy = data.aws_iam_policy_document.gitpod_assume_role.json
+  inline_policy {
+    name   = "gitpod_permissions"
+    policy = data.aws_iam_policy_document.gitpod_permissions.json
+  }
+}
+
+data "aws_iam_policy_document" "gitpod_permissions" {
+  statement {
+    actions = ["eks:DescribeCluster"]
+    resources = ["*"]
+    effect  = "Allow"
+  }
+}
+
+data "aws_iam_policy_document" "gitpod_assume_role" {
+  statement {
+    actions = ["sts:AssumeRoleWithWebIdentity"]
+    effect  = "Allow"
+
+    condition {
+      test     = "StringEquals"
+      variable = "services.gitpod.io/idp:aud"
+      values   = ["sts.amazonaws.com"]
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "services.gitpod.io/idp:sub"
+      values   = ["https://github.com/datamindedbe/kubernetes_academy_course"]
+    }
+
+    principals {
+      identifiers = [aws_iam_openid_connect_provider.eks_connect_provider_gitpod.arn]
+      type        = "Federated"
+    }
+  }
+}
+
 resource "aws_iam_group_policy_attachment" "eks_cluster_policy" {
   # description: This policy provides Kubernetes the permissions it requires to
   # manage resources on your behalf. Kubernetes requires Ec2:CreateTags

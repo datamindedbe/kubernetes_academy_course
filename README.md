@@ -11,9 +11,10 @@ For this reason I manage a real kubernetes cluster, which is running on AWS, to 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/datamindedbe/kubernetes_academy_course)
 
 Usage:
-- I will give the info on how to connect to the cluster (AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY)
-  - run the following command in gitpod: `source expose_env_vars.sh <ACCESS_KEY_ID> <SECRET_ACCESS_KEY>`
-  - run then: `./connect_cluster.sh k8s-bn54I8`
+- run the following command in gitpod to get access to the cluster: `gp idp login aws --role-arn arn:aws:iam::299641483789:role/kubernetes-workshop-gitpod-role`
+- run then: `./connect_cluster.sh k8s-24vTxK`
+
+This works because the instructor has setup the connection between gitpod and the eks cluster as follows: https://www.gitpod.io/docs/integrations/aws
 
 - Create a namespace for yourself and make sure to create *all resources in your own namespace* such that you do not impact each other.
 ```
@@ -45,7 +46,3 @@ More info on installing it can be found here: https://microk8s.io/docs/getting-s
 - Exercise 15: Kustomize with generated configmap and secret
 - Exercise 16: Using a helm chart
 - Exercise 17: Creating a helm chart
-
-## TODOs
-
-Rework exercise on storage. Split up local vs eks exercise and change the README.md

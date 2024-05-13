@@ -9,20 +9,20 @@ data "aws_subnets" "private" {
 }
 
 module "eks" {
-  source          = "terraform-aws-modules/eks/aws"
-  version         = "19.9.0"
-  cluster_name    = local.cluster_name
-  cluster_version = "1.27"
-  subnet_ids      = data.aws_subnets.private.ids
-  vpc_id          = module.vpc.vpc_id
-  enable_irsa     = true
+  source                         = "terraform-aws-modules/eks/aws"
+  version                        = "19.9.0"
+  cluster_name                   = local.cluster_name
+  cluster_version                = "1.27"
+  subnet_ids                     = data.aws_subnets.private.ids
+  vpc_id                         = module.vpc.vpc_id
+  enable_irsa                    = true
   cluster_endpoint_public_access = true
 
   eks_managed_node_group_defaults = {
-    disk_size      = 50
-    instance_types = ["t3.large"]
-    pre_bootstrap_user_data = local.ssm_userdata
-    iam_role_additional_policies = {"ssm": "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"}
+    disk_size                    = 50
+    instance_types               = ["t3.large"]
+    pre_bootstrap_user_data      = local.ssm_userdata
+    iam_role_additional_policies = { "ssm" : "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore" }
   }
 
   cluster_security_group_additional_rules = {
@@ -57,7 +57,7 @@ module "eks" {
   }
 
   manage_aws_auth_configmap = true
-  aws_auth_users = [
+  aws_auth_users            = [
     {
       userarn = aws_iam_user.workshop_user.arn
       groups  = ["system:masters"]
@@ -69,6 +69,10 @@ module "eks" {
       rolearn = "arn:aws:iam::${local.account_id}:role/AWSReservedSSO_AdministratorAccess_3927b2c3b8ca005c"
       groups  = ["system:masters"]
     },
+    {
+      rolearn = "arn:aws:iam::${local.account_id}:role/kubernetes-workshop-gitpod-role"
+      groups  = ["system:masters"]
+    }
   ]
 
   aws_auth_accounts = [
@@ -78,4 +82,14 @@ module "eks" {
   tags = {
     Terraform = "true"
   }
+}
+
+resource "aws_iam_openid_connect_provider" "eks_connect_provider_gitpod" {
+  url             = "https://services.gitpod.io/idp"
+  client_id_list  = ["sts.amazonaws.com"]
+  thumbprint_list = [
+    "F2309CE0494F89BD1C502084FA42243CC18727FF",
+    "349C385FF8E330F20EAD733CD36FB435FEE0B403",
+    "08745487E891C19E3078C1F2A07E452950EF36F6"
+  ]
 }

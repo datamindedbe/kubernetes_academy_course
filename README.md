@@ -16,7 +16,7 @@ When there are separate instructions for both situation.
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/datamindedbe/kubernetes_academy_course)
 
 Usage:
-- run the following command in gitpod to get access to the cluster: `gp idp login aws --role-arn arn:aws:iam::299641483789:role/kubernetes-workshop-gitpod-role`
+- run the following command in gitpod to get access to the cluster: `gp idp login aws --role-arn arn:aws:iam::299641483789:role/kubernetes-workshop-gitpod-role --duration-seconds=28800`
 - run then: `./connect_cluster.sh k8s-24vTxK`
 
 More details on how to integrate gitpod with an eks cluster can be found on the following link: https://www.gitpod.io/docs/integrations/aws

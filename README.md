@@ -11,7 +11,7 @@ For this reason I manage a real kubernetes cluster, which is running on AWS, to 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/datamindedbe/kubernetes_academy_course)
 
 Usage:
-- run the following command in gitpod to get access to the cluster: `gp idp login aws --role-arn arn:aws:iam::299641483789:role/kubernetes-workshop-gitpod-role`
+- run the following command in gitpod to get access to the cluster: `gp idp login aws --role-arn arn:aws:iam::299641483789:role/kubernetes-workshop-gitpod-role --duration-seconds=28800`
 - run then: `./connect_cluster.sh k8s-24vTxK`
 
 This works because the instructor has setup the connection between gitpod and the eks cluster as follows: https://www.gitpod.io/docs/integrations/aws

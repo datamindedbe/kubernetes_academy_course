@@ -1,3 +1,7 @@
+# Deprecated
+
+This repository has been moved to: https://github.com/datamindedacademy/kubernetes_academy_course
+
 # Kubernetes basics
 
 This repository contains the exercises used in the kubernetes course.
